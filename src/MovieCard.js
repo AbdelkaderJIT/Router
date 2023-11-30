@@ -1,6 +1,6 @@
 import Card from 'react-bootstrap/Card';
 
-
+import ReactStars from 'react-stars'
 
 
 const  MovieCard = (props) => {
@@ -16,7 +16,13 @@ const  MovieCard = (props) => {
          Movie description: {props.el.description} 
         </Card.Text>
         <Card.Text>
-         Rating : {props.el.rating} Stars
+        <ReactStars
+  count={5}
+  size={24}
+  color2={'#ffd700'} 
+  value={props.el.rating}
+  edit={false}
+  />
         </Card.Text>
       </Card.Body>
     </Card>

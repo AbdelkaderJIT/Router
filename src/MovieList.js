@@ -4,6 +4,7 @@ import MovieCard from "./MovieCard";
 
 import Button from 'react-bootstrap/Button';
 import Filter from './Filter';
+import Modal from 'react-bootstrap/Modal';
 
 
 function MovieList() {
@@ -15,6 +16,11 @@ function MovieList() {
       rating : "5" 
   }
   ]);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
 
 
@@ -60,10 +66,21 @@ useEffect(() => {
         }
         </div>
         
+       
         <div style={{width:"400px",marginTop:"50px"}}> 
 
+        <Button variant="primary" onClick={handleShow}>
+        Add Movie
+      </Button>
 
-<Form  onSubmit={handleSubmit}>
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Adding a movie</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+
+        <Form  onSubmit={handleSubmit}>
 
 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
   <h3 style={{color:"pink", marginBottom:"20px"}}>Add a new movie </h3>
@@ -100,6 +117,25 @@ useEffect(() => {
 </Form.Group>
 <Button type="submit">Add movie</Button>
 </Form>
+
+
+
+
+
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
 
 
          </div>
