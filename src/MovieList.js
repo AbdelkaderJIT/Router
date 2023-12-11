@@ -1,7 +1,6 @@
 import Form from 'react-bootstrap/Form';
-import {useEffect, useState } from 'react';
-import MovieCard from "./MovieCard";
-
+import { useState } from 'react';
+import ReactStars from 'react-stars';
 import Button from 'react-bootstrap/Button';
 import Filter from './Filter';
 import Modal from 'react-bootstrap/Modal';
@@ -13,14 +12,20 @@ function MovieList() {
       title : "V for vendetta",
       description : "V for Vendetta is a 2006 dystopian political action film directed by James McTeigue from a screenplay by the Wachowskis. It is based on the 1988–89 DC",
       posterUrl : "https://img-assets.drafthouse.com/images/shows/v-for-vendetta/vforvendetta_hero.jpg?auto=compress&crop=focalpoint&fit=crop&fp-x=0.465&fp-y=0.4066&h=1080&q=80&w=1920",
-      rating : "5" 
+      rating : "5",
+      id:"1" 
   }
   ]);
 
+
+
   const [show, setShow] = useState(false);
+  const [search, setSearch ] = useState("");
+  const [searchByRating, setSearchByRating ] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
 
 
 
@@ -33,9 +38,7 @@ function MovieList() {
 )
 
 
-useEffect(() => {
-   
-},[movie]);
+
 
    const handleSubmit = (event) => {
 
@@ -51,27 +54,55 @@ useEffect(() => {
    
 
    };
+   const ratingChanged = (newRating) => {
+    setSearchByRating (newRating);
+   
+  }
+ 
 
 
     return  ( 
         <>
         <h1 style={{marginBottom:"100px"}}>Gomycode Movies</h1>
-        <div style={{display:"flex", justifyContent:"space-evenly"}}>
+
+
+        
+
+
+        <div style={{display:"flex", flexDirection:"column", padding:"50px",}}>
+
+  <label>Search your movie</label>
+<input style={{margin:"20px"}}  onChange={(event) => setSearch(event.target.value)} />
+<ReactStars
+  count={5}
+  size={24}
+  color2={'#ffd700'} 
+  onChange={ratingChanged}
+  />
+</div>
+
+
+
+<div style={{display:"flex", justifyContent:"space-evenly"}}>
         {
-        movie.map((el ,index)=>(
-        <MovieCard key={index} el= {el} />
+
+
+       movie.filter((el)=>el.title.toLowerCase().includes(search.toLowerCase()) &&
+       el.rating >= searchByRating).map((el)=>(
+        <Filter  el= {el} />
         )
         
      )
         }
         </div>
         
+        <Button style={{marginTop:"400px"}} variant="primary" onClick={handleShow}>
+        Add Movie
+      </Button>
        
         <div style={{width:"400px",marginTop:"50px"}}> 
 
-        <Button variant="primary" onClick={handleShow}>
-        Add Movie
-      </Button>
+       
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
@@ -119,17 +150,10 @@ useEffect(() => {
 </Form>
 
 
-
-
-
-
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
@@ -140,19 +164,7 @@ useEffect(() => {
 
          </div>
 
-         <h1 style={{marginBottom:"50px", color:"pink"}}>Sorted movies by rating</h1>
-         <div style={{display:"flex", justifyContent:"space-evenly"}}>
-           
-        {
-
-
-       movie.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating)).map((el ,index)=>(
-        <Filter key={index} el= {el} />
-        )
-        
-     )
-        }
-        </div>
+         
 
 
      </>);

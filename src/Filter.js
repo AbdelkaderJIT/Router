@@ -1,25 +1,26 @@
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
-const  Filter = (props) => {
-    console.log(props.el)
+const  Filter = ({el}) => {
+    
     return ( 
 <>
 
 
             
         <Card style={{ width: '18rem' , height:"8rem" }} >
-      <Card.Img variant="top" src={props.el.posterUrl} />
+      <Card.Img variant="top" src={el.posterUrl} />
       <Card.Body>
-        <Card.Title>Title: {props.el.title} </Card.Title>
+        <Card.Title>Title: {el.title} </Card.Title>
         <Card.Text>
-         Movie description: {props.el.description} 
+         Movie description: {el.description} 
         </Card.Text>
         <Card.Text>
-         Rating : {props.el.rating} Stars
+         Rating : {el.rating} Stars
         </Card.Text>
       </Card.Body>
     </Card>
-
+    <Link to = {`/Description/${el.id}`} ><button>See description</button></Link>
 
 </>
   );
