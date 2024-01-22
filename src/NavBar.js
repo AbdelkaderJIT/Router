@@ -16,6 +16,10 @@ const NavBar = () => {
         <Link style={{padding:"20px"}} to="/movies">
         <h5>Movies</h5>
         </Link>
+
+        <Link style={{padding:"20px"}} to="/Profile">
+        <h5>Profile</h5>
+        </Link>
        
       </Nav>
     </Container>

@@ -1,12 +1,24 @@
 import Form from 'react-bootstrap/Form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactStars from 'react-stars';
 import Button from 'react-bootstrap/Button';
 import Filter from './Filter';
 import Modal from 'react-bootstrap/Modal';
+import axios from 'axios';
 
 
 function MovieList() {
+
+
+  let[ProfileList,setProfileList]=useState("")
+  console.log(ProfileList,"aminnnne")
+  useEffect(()=>{
+      axios.get("https://jsonplaceholder.typicode.com/users")
+      .then((res)=>setProfileList(res.data))
+      .catch((err)=>console.log(err))
+  }
+
+  ,[])
 
    var [movie,setMovie] = useState([{
       title : "V for vendetta",

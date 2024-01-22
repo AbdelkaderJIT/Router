@@ -2,16 +2,11 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
     return (
-      <div style={{ 
-        backgroundImage: `url("https://wallpapers.com/images/featured/movie-9pvmdtvz4cb0xl37.jpg")`,
-        height:"1080",
-        width:"1920"
-        }}>
-            
-       <h1 style={{display:"flex", justifyContent:"center",padding:"300px", color:"white", fontSize:"100px"}}>Welcome to 123movies.com </h1>
-
-       <Link> <button>Go to list of movies</button></Link>
-      </div>
+<div>
+  <iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
+  src="https://maps.google.com/maps?width=100%%26amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+    <a href="https://www.maps.ie/population/">Population mapping</a></iframe>
+</div>
     );
   };
   export default Home;
